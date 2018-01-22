@@ -37,9 +37,14 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_thrift',
     'app.Newsapp',
 )
 
+THRIFT = {
+    "FILE": "service.thrift",
+    "SERVICE": "service"
+}
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -49,6 +54,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'nginx_redis_cache.middleware.UpdateCacheMiddleware',
 )
 
 ROOT_URLCONF = 'rpc_cacheDistribuite.urls'
@@ -56,7 +62,7 @@ ROOT_URLCONF = 'rpc_cacheDistribuite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -88,6 +94,15 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+
+    }
+}
+
+CACHE_MIDDLEWARE_ALIAS = 'nginx_cache'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
