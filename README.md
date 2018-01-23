@@ -23,10 +23,13 @@ Añadir 'apigateway' y 'rest_framework' a tu paquete de INSTALLED_APPS settings.
 
 Añade la siguiente ruta al archivo urls.py
 
+
 urlpatterns = [
     ...
     url(r'^service/', include('apigateway.urls', namespace='apigateway')),
 ]
+
+Update database model
 
 Actualiza tus modelos de base de datos
 
