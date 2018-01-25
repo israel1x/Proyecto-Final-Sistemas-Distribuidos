@@ -39,7 +39,7 @@ li a:hover {
           <nav id="main-nav-wrap">
               <ul class="main-navigation">
 
-                  <li><a href="#" title="">Inicio</a></li>
+                  <li><a href="/" title="">Inicio</a></li>
                   <li><a href="#" title="">TOP 10 NEWS</a></li>
                   <li><a href="#" title="">acerca de</a></li>
 
@@ -54,11 +54,10 @@ li a:hover {
 
 
 {% for noticia in noticias %}
-
+                  <div>
                    <h3>{{noticia.title}}</h3>
-                   <h5>{{noticia.url}}</h5>
-                   <h5>{{noticia.category}}</h5>
-                   <h5>{{noticia.num_access}}</h5>
+                   <a>{{noticia.url}}</a>
+                 </div>
 
 {% endfor %}
 </body>

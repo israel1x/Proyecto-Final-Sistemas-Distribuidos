@@ -29,8 +29,6 @@ def main():
     #client.getnewsmysql()
     #print(client.getnewsmysql())
 
-
-
 def index(request):
 
     # Make socket
