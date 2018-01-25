@@ -42,7 +42,7 @@ class Server():
     def getnewsmysql(self):
         listNews=[]
 
-        query = "SELECT * FROM Newsapp_new ORDER BY num_access DESC LIMIT 10"
+        query = "SELECT * FROM distribuido ORDER BY token_num DESC LIMIT 10"
 
 
         cursor.execute(query)
@@ -55,7 +55,7 @@ class Server():
         print(stopTime)
         print "termina"
         for row in result:
-            print row[0], row[1], row[2], row[3], row[4], row[5]
+            #print row[0], row[1], row[2], row[3], row[4], row[5]
             listNews.append(KVNews(str(row[1]), str(row[2])))
 
         return listNews
@@ -89,11 +89,11 @@ class Server():
             redis_server.expire(key,360)
 
             print "se agregaron datos a la memoria cache"
-            print "\n devuelve datos directamente de la base de datos"
+            print "devuelve datos directamente de la base de datos"
 
             return cPickle.loads(redis_server.get(key))
 
-            
+
 
     #def stop(self):
     #    self.transport.close()

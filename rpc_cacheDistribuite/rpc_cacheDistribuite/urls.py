@@ -21,5 +21,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('app.Newsapp.urls')),
     #url(r'^', New, name='New'),
-    url(r'^service/', include('apigateway.urls', namespace='apigateway')),
+    #url(r'^service/', include('apigateway.urls', namespace='apigateway')),
 ]

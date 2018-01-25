@@ -39,8 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django_thrift',
     'app.Newsapp',
-    'apigateway',
-    'rest_framework',
+    #'apigateway',
+    #'rest_framework',
 )
 
 THRIFT = {
