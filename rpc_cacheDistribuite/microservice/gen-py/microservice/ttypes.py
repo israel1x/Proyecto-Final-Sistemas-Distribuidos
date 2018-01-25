@@ -20,13 +20,13 @@ class KVNews(object):
     """
     Attributes:
      - title
-     - description
+     - url
     """
 
 
-    def __init__(self, title=None, description=None,):
+    def __init__(self, title=None, url=None,):
         self.title = title
-        self.description = description
+        self.url = url
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -44,7 +44,7 @@ class KVNews(object):
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.STRING:
-                    self.description = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                    self.url = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
             else:
@@ -61,9 +61,9 @@ class KVNews(object):
             oprot.writeFieldBegin('title', TType.STRING, 1)
             oprot.writeString(self.title.encode('utf-8') if sys.version_info[0] == 2 else self.title)
             oprot.writeFieldEnd()
-        if self.description is not None:
-            oprot.writeFieldBegin('description', TType.STRING, 2)
-            oprot.writeString(self.description.encode('utf-8') if sys.version_info[0] == 2 else self.description)
+        if self.url is not None:
+            oprot.writeFieldBegin('url', TType.STRING, 2)
+            oprot.writeString(self.url.encode('utf-8') if sys.version_info[0] == 2 else self.url)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -150,7 +150,7 @@ all_structs.append(KVNews)
 KVNews.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'title', 'UTF8', None, ),  # 1
-    (2, TType.STRING, 'description', 'UTF8', None, ),  # 2
+    (2, TType.STRING, 'url', 'UTF8', None, ),  # 2
 )
 all_structs.append(kVCollection)
 kVCollection.thrift_spec = (

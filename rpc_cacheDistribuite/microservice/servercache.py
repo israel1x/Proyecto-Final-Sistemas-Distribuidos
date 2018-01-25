@@ -38,6 +38,7 @@ class Server():
         print('ping() server')
 
 
+
     def getnewsmysql(self):
         listNews=[]
 
@@ -48,12 +49,14 @@ class Server():
         print "\n"
         startTime = datetime.now()
         print(startTime)
+        print "inicia"
         result = self.cache_memory(query)
         stopTime = datetime.now()
         print(stopTime)
-        for row in cursor:
+        print "termina"
+        for row in result:
             print row[0], row[1], row[2], row[3], row[4], row[5]
-            listNews.append(KVNews(str(row[0]), str(row[1])))
+            listNews.append(KVNews(str(row[1]), str(row[2])))
 
         return listNews
 
@@ -61,15 +64,18 @@ class Server():
 
     def cache_memory(self, query):
 
-        hash = hashlib.sha224(query).hexdigest()
-        key = "sql_cache: " + hash
+
+        hora_consulta=time.strftime("%H:%M")
+
+        hash = hashlib.sha224(hora_consulta).hexdigest()
+        key = "key_cache: " + hash
         print ("Created Key\t : %s" % key)
 
 
         #consulta si hay datos en la memoria cache
 
         if(redis_server.get(key)):
-            print "valores en memoria cache"
+            print "valores alojados en memoria cache son mostrados"
             return cPickle.loads(redis_server.get(key))
 
         else:
@@ -80,12 +86,14 @@ class Server():
             data = cursor.fetchall()
 
             redis_server.set(key, cPickle.dumps(data))
-            redis_server.expire(key,200)
+            redis_server.expire(key,360)
 
             print "se agregaron datos a la memoria cache"
+            print "\n devuelve datos directamente de la base de datos"
 
             return cPickle.loads(redis_server.get(key))
 
+            
 
     #def stop(self):
     #    self.transport.close()
